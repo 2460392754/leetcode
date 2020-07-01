@@ -1,7 +1,7 @@
 /*
  * @Author: Pocky
  * @Date: 2020-07-01 09:16:17
- * @LastEditTime: 2020-07-01 11:22:03
+ * @LastEditTime: 2020-07-01 14:07:24
  * @URL: https://leetcode-cn.com/problems/pascals-triangle/
  */
 
@@ -79,4 +79,55 @@ var generate = function (numRows) {
     return arr;
 };
 
-console.log(generate(5));
+// ==========
+// 2.双指针
+// 执行用时：68 ms, 在所有 JavaScript 提交中击败了 60.53% 的用户
+// 内存消耗：32.3 MB, 在所有 JavaScript 提交中击败了 100.00% 的用户
+// ==========
+
+/**
+ * @param {number} numRows
+ * @return {number[][]}
+ */
+var generate = function (numRows) {
+    // 初始化
+    const arr = [[1], [1, 1]];
+
+    // 处理边界
+    if (numRows < 3) {
+        arr.length = numRows;
+
+        return arr;
+    }
+
+    for (let i = arr.length; i < numRows; i++) {
+        // 设置双指针下标值
+        let left = 0;
+        let right = i;
+
+        arr[i] = [];
+
+        // 双指针遍历
+        while (left <= right) {
+            const prev = arr[i - 1];
+
+            // 设置默认值
+            let leftVal = 1;
+            let rightVal = 1;
+
+            // 跳过 数组中首位下标位置的数据计算
+            if (left !== 0 && right !== i) {
+                leftVal = prev[left - 1] + prev[left];
+                rightVal = prev[right - 1] + prev[right];
+            }
+
+            arr[i][left] = leftVal;
+            arr[i][right] = rightVal;
+
+            left++;
+            right--;
+        }
+    }
+
+    return arr;
+};
