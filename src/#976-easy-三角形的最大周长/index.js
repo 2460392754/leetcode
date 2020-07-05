@@ -1,12 +1,12 @@
 /*
  * @Author: Pocky
  * @Date: 2020-07-05 21:51:24
- * @LastEditTime: 2020-07-05 22:07:36
+ * @LastEditTime: 2020-07-05 22:09:18
  * @URL: https://leetcode-cn.com/problems/largest-perimeter-triangle/
  */
 
 // ==========
-// 1.双指针遍历
+// 1.排序+遍历
 // 时间复杂度：o(n)
 // 空间复杂度：o(n)
 // 执行用时：104 ms, 在所有 JavaScript 提交中击败了 90.64% 的用户
