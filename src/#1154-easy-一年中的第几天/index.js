@@ -1,7 +1,7 @@
 /*
  * @Author: Pocky
  * @Date: 2020-07-05 22:14:11
- * @LastEditTime: 2020-07-05 22:49:05
+ * @LastEditTime: 2020-07-05 22:53:21
  * @URL: https://leetcode-cn.com/problems/day-of-the-year/
  */
 
@@ -31,7 +31,7 @@ var dayOfYear = function (date) {
 // 2.暴力法
 // 时间复杂度：o(1)
 // 空间复杂度：o(1)
-// 执行用时：84 ms, 在所有 JavaScript 提交中击败了 16.67% 的用户
+// 执行用时：72 ms, 在所有 JavaScript 提交中击败了 57.02% 的用户
 // 内存消耗：33.4 MB, 在所有 JavaScript 提交中击败了 100.00% 的用户
 // ==========
 
@@ -44,7 +44,7 @@ var dayOfYear = function (date) {
 
     // 获取 年月日
     const year = d.getFullYear();
-    const month = d.getMonth() + 1;
+    const month = d.getMonth();
     const day = d.getDate();
 
     // 非闰年每月天数 列表
