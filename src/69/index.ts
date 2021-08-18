@@ -1,3 +1,9 @@
+/**
+ * @description:
+ * @param {*}
+ * @return {*}
+ */
+
 (() => {
     /**
      * 暴力计算
