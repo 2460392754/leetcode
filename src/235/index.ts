@@ -1,3 +1,12 @@
+/*
+ * @Author: 费陶勇
+ * @Date: 2021-12-10 09:49:09
+ * @LastEditTime: 2021-12-10 20:37:05
+ * @LastEditors: your name
+ * @Description:https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+ * @FilePath: /leetcode/src/235/index.ts
+ */
+
 class TreeNode {
     val: number;
     left: TreeNode | null;
