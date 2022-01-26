@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "record": "node ./scripts/updateRecord.js"
+    },
+    "dependencies": {
+        "inquirer": "^8.2.0"
+    }
+}
