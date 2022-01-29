@@ -1,6 +1,8 @@
 const FS = require('fs')
 const Inquirer = require('inquirer');
 
+const difficulty = ['简单', '中等', '困难'];
+
 Inquirer.prompt([
     {
         type: 'input',
@@ -16,7 +18,7 @@ Inquirer.prompt([
         type: 'list',
         name: 'difficulty',
         message: 'Leetcode Topic Difficulty:',
-        choices: ['简单', '中等', '困难']
+        choices: difficulty
     },
 ]).then(res => {
     console.log(res)
@@ -35,6 +37,9 @@ class Main {
     name = ''
     difficulty = ''
 
+    // 
+    day = 0
+
     constructor(id, name, difficulty) {
         try {
             this.id = id;
@@ -42,8 +47,9 @@ class Main {
             this.difficulty = difficulty
 
             this.content = FS.readFileSync(this.filePath).toString()
+            this.addRecord()
             this.updateRecordDayCount()
-            this.addRecord(999, 'xxx', 1)
+            this.updateDifficultyCount()
             FS.writeFileSync(this.filePath, this.content)
         } catch (err) {
             console.error(err);
@@ -55,8 +61,31 @@ class Main {
      * @returns 
      */
     updateRecordDayCount() {
-        this.content = this.content.replace(/`\d+`/, n => {
-            return '`' + (parseInt(n.substring(1, n.length - 1)) + 1) + '`'
+        this.content = this.content.replace(/已连续打卡 `\d+` 天/, n => {
+            this.day = parseInt(n.match(/\d+/)[0]) + 1;
+
+            return '已连续打卡 `' + this.day + '` 天'
+        })
+    }
+
+    /**
+     * 更新难度类型数量
+     */
+    updateDifficultyCount() {
+        difficulty.forEach(type => {
+            const regCount = new RegExp(`\\[${type}\\]`, 'g')
+            const regUpdate = new RegExp(`${type}: \`\\d+\` 题 ,占 \`\\d+%\``)
+            const count = (this.content.match(regCount) || {}).length || 0
+            const percentage = Number(String(String(count / this.day) * 100).substr(0, 5)) + '%'
+
+            this.content = this.content.replace(regUpdate, txt => {
+                txt = txt.replace(/`\d+` 题/, `\`${count}\` 题`);
+                txt = txt.replace(/占 `\d+%`/, `占 \`${percentage}\``);
+
+                console.log(percentage, this.day, txt)
+
+                return txt;
+            })
         })
     }
 
