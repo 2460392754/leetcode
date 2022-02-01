@@ -74,15 +74,15 @@ class Main {
     updateDifficultyCount() {
         difficulty.forEach(type => {
             const regCount = new RegExp(`\\[${type}\\]`, 'g')
-            const regUpdate = new RegExp(`${type}: \`\\d+\` 题 ,占 \`\\d+(\\.)?\\d+%\``)
+            const regUpdate = new RegExp(`${type}: \`\\d+\` 题 ,占 \`\\d+(\\.\\d+)?%\``)
             const count = (this.content.match(regCount) || {}).length || 0
             const percentage = Number(String(String(count / this.day) * 100).substr(0, 5)) + '%'
 
-            console.log(percentage, this.day, count, regUpdate)
+            // console.log(percentage, this.day, count, regUpdate)
 
             this.content = this.content.replace(regUpdate, txt => {
                 txt = txt.replace(/`\d+` 题/, `\`${count}\` 题`);
-                txt = txt.replace(/占 `\d+(\.)?\d+%`/, `占 \`${percentage}\``);
+                txt = txt.replace(/占 `\d+(\.\d+)?%`/, `占 \`${percentage}\``);
 
                 return txt;
             })
